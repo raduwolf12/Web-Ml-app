@@ -1,0 +1,13 @@
+{
+  "name": "cloud",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "dependencies": {},
+  "devDependencies": {},
+  "scripts": {
+    "start": "functions-framework --target=helloWorld"
+  },
+  "author": "",
+  "license": "ISC"
+}

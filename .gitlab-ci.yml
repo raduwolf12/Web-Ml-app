@@ -1,0 +1,21 @@
+image: google/cloud-sdk:lab2-310912
+
+test_production:
+  image: node:14
+  stage: test
+  only:
+  - master
+  script:
+  -  npm run start cloud/index.js 
+
+deploy_production:
+  stage: deploy
+  environment: master
+  only:
+  - master
+  script:
+  - echo $SERVICE_ACCOUNT > /tmp/$CI_PIPELINE_ID.json
+  - gcloud auth activate-service-account --key-file /tmp/$CI_PIPELINE_ID.json
+  - gcloud --quiet --project $PROJECT_ID functions deploy HelloGet --runtime go111 --trigger-http
+  after_script:
+  - rm /tmp/$CI_PIPELINE_ID.json
